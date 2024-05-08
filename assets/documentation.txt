@@ -1,0 +1,517 @@
+                ## Getting started
+
+                Phew library has seven classes namely: Annuity, Cola, Expenses, Interest_rates, Loss_given_delay, Premium and Time_value.
+                For example, Time_value class importation can be done as follows: 
+                ```python
+                >> from phew import Time_value
+                ```
+
+                ### Annuity
+
+                Help on class Annuity in module phew.Annuity:
+
+                ```nothing
+
+                class Annuity(builtins.object)
+                 |  Annuity(interest_rate: float, number_of_terms: int, amount: float = 1)
+                 |  
+                 |  Returns time values of an annuity
+                 |  
+                 |  args:
+                 |      interest_rate (float) : interest rate
+                 |      number_of_terms (int) : number of periods
+                 |      amount (float : amount)
+                 |  
+                 |  Methods defined here:
+                 |  
+                 |  __init__(self, interest_rate: float, number_of_terms: int, amount: float = 1)
+                 |      Initialize self.  See help(type(self)) for accurate signature.
+                 |  
+                 |  certain_future_value(self)
+                 |      Returns future value of annuity certain
+                 |      
+                 |      Returns:
+                 |          float : future value for annuity certain
+                 |  
+                 |  certain_present_value(self)
+                 |      Returns present value of annuity certain
+                 |      
+                 |      Returns:
+                 |          float : present value for annuity certain
+                 |  
+                 |  due_future_value(self)
+                 |      Returns future value of annuity due
+                 |      
+                 |      Returns:
+                 |          float : future value for annuity due
+                 |  
+                 |  due_present_value(self)
+                 |      Returns present value of annuity due
+                 |      
+                 |      Returns:
+                 |          float : present value for annuity due
+                 |  
+                 |  ----------------------------------------------------------------------
+                 |  Data descriptors defined here:
+                 |  
+                 |  __dict__
+                 |      dictionary for instance variables (if defined)
+                 |  
+                 |  __weakref__
+                 |      list of weak references to the object (if defined)
+
+                ```
+
+                Code example
+
+                ```python
+                >> from phew import Annuity
+                >> annuity = Annuity(interest_rate = 0.1,number_of_terms = 4,amount = 500)
+                >> annuity.certain_present_value()
+                >> 1584.9327231746472
+                ```
+
+                ### COLA
+
+                Help on class Cola in module phew.Cola:
+
+                ```nothing
+
+                class Cola(builtins.object)
+                 |  Cola(initial_fund: float, data: list, method: str = 'cpi')
+                 |  
+                 |  Returns movement of fund when Cost of living adjustment (COLA) is applied
+                 |  
+                 |  args:
+                 |      initial_fund (float) : initial amount
+                 |      data (list) : expected cpi/inflation values for the next periods
+                 |      method (str) : 'cpi','inflation'
+                 |  
+                 |  Methods defined here:
+                 |  
+                 |  __init__(self, initial_fund: float, data: list, method: str = 'cpi')
+                 |      Initialize self.  See help(type(self)) for accurate signature.
+                 |  
+                 |  fund_growth(self)
+                 |      Returns movement fund
+                 |      
+                 |      Returns:
+                 |          float : expected fund values
+                 |  
+                 |  ----------------------------------------------------------------------
+                 |  Data descriptors defined here:
+                 |  
+                 |  __dict__
+                 |      dictionary for instance variables (if defined)
+                 |  
+                 |  __weakref__
+                 |      list of weak references to the object (if defined)
+
+                ```
+
+                Code example
+
+                ```python
+                >> from phew import Cola
+                >> cola = Cola(initial_fund = 1000,data = [0.12,0.2,0.21],method = 'inflation')
+                >> cola.fund_growth()
+                >> array([1120.  , 1344.  , 1626.24])
+                ```
+
+                ### Expenses
+
+                Help on class Expenses in module phew.Expenses:
+
+                ```nothing
+
+                class Expenses(builtins.object)
+                 |  Expenses(mean_expenses: float, variance_expenses: float, fund_amount: float)
+                 |  
+                 |  Returns expenses allocation
+                 |  
+                 |  args:
+                 |      mean_expenses (float) : x
+                 |      variance_expenses (float) : y
+                 |      fund_amount (float) : total fund value
+                 |  
+                 |  Methods defined here:
+                 |  
+                 |  __init__(self, mean_expenses: float, variance_expenses: float, fund_amount: float)
+                 |      Initialize self.  See help(type(self)) for accurate signature.
+                 |  
+                 |  montecarlo(self, alpha: int, number_of_replications: int)
+                 |      Returns optimal expense ratio and variance after running Monte Carlo where expenses is assumed to follow pareto distribution
+                 |      
+                 |      args:
+                 |          alpha (int) : alpha
+                 |          number_of_replications (int) : number of replications
+                 |          
+                 |       Returns:
+                 |           dict : optimal_ratio, ratio_output,expense_output
+                 |  
+                 |  ----------------------------------------------------------------------
+                 |  Data descriptors defined here:
+                 |  
+                 |  __dict__
+                 |      dictionary for instance variables (if defined)
+                 |  
+                 |  __weakref__
+                 |      list of weak references to the object (if defined)
+
+
+                ```
+
+                ### Loss given delay
+
+                Help on class Loss_given_delay in module phew.Loss_given_delay:
+
+                ```nothing
+
+                class Loss_given_delay(builtins.object)
+                 |  Loss_given_delay(number_of_days: list, ratio_of_workers_to_population: float, carrying_capacity: int, benefit: float, expected_daily_delays_in_a_season: list)
+                 |  
+                 |  Returns loss given a trip delay event
+                 |  
+                 |  args:
+                 |      number_of_days (list) : number of days in a year categorised by seasons
+                 |      ratio_of_workers_to_population (float) : probability of finding a formal sector worker in a bus
+                 |      carrying_capacity (int) : average carrying capacity for buses
+                 |      benefit (float) : benefit received at loss event
+                 |      expected_daily_delays_in_a_season (float) : expected daily delays categorised by seasons
+                 |  
+                 |  Methods defined here:
+                 |  
+                 |  __init__(self, number_of_days: list, ratio_of_workers_to_population: float, carrying_capacity: int, benefit: float, expected_daily_delays_in_a_season: list)
+                 |      Initialize self.  See help(type(self)) for accurate signature.
+                 |  
+                 |  daily_loss_compute(self, number_of_replications: int)
+                 |      Returns daily loss in seasons specified through Monte Carlo simulation
+                 |      
+                 |      args:
+                 |          number_of_replications (int) : number of replications
+                 |      
+                 |      Returns:
+                 |          dict : daily loss
+                 |  
+                 |  expected_claims(self, time_frame: str = 'day')
+                 |      Returns expected claims in a day,season and year through Monte Carlo simulation
+                 |      
+                 |      args:
+                 |          time_frame (str) : 'day','season','year'
+                 |          
+                 |      Returns:
+                 |          dict : expected claims
+                 |  
+                 |  seasonal_loss_compute(self, expected_daily_loss: list)
+                 |      Returns seasonal loss
+                 |      
+                 |      args:
+                 |          expected_daily_loss (list) : expected daily loss computed
+                 |      
+                 |      Returns:
+                 |          dict : seasonal loss
+                 |  
+                 |  yearly_loss_compute(self, expected_loss_in_season: list)
+                 |      Returns yearly loss
+                 |      
+                 |      args:
+                 |          expected_loss_in_season (list) : expected seasonal loss computed
+                 |      
+                 |      Returns:
+                 |          dict : yearly loss
+                 |  
+                 |  ----------------------------------------------------------------------
+                 |  Data descriptors defined here:
+                 |  
+                 |  __dict__
+                 |      dictionary for instance variables (if defined)
+                 |  
+                 |  __weakref__
+                 |      list of weak references to the object (if defined)
+
+                ```
+
+                ### Premium 
+
+                Help on class Premium in module phew.Premium:
+
+                ```nothing
+
+                class Premium(builtins.object)
+                 |  Returns formulae to compute premium
+                 |  
+                 |  Methods defined here:
+                 |  
+                 |  expense_ratio(fund_costs: float, fund_assets: float)
+                 |      Returns expense ratio by dividing costs by fund amount
+                 |      
+                 |      args:
+                 |          fund_costs (float) : fund expenses
+                 |          funds_assets (float) : total fund value
+                 |          
+                 |      Returns:
+                 |          float : expense ratio
+                 |  
+                 |  gross_premium(gross_rate: float, units: float)
+                 |      Returns gross premium by multiplying gross rate by units
+                 |      
+                 |      args:
+                 |          gross_rate (float) : price of a single unit of exposure
+                 |          units (float) : number of units (purchases)
+                 |          
+                 |      Returns:
+                 |          float : gross premium
+                 |  
+                 |  gross_rate(pure_premium: float, expense_ratio: float)
+                 |      Returns gross rate
+                 |      
+                 |      args:
+                 |          pure_premium (float) : price of insurance that excludes expenses
+                 |          expense_ratio (float) : ratio of costs to total fund value
+                 |          
+                 |      Returns:
+                 |          float : price of a single unit of exposure
+                 |  
+                 |  pure_premium_1(loss: float, exposures: float)
+                 |      Returns pure premium by dividing losses by exposures
+                 |      
+                 |      args:
+                 |          loss (float) : losses from an event
+                 |          exposures (float) : number of individuals exposed to the loss
+                 |          
+                 |      Returns:
+                 |          float : pure premium
+                 |  
+                 |  pure_premium_2(frequency: float, severity: float)
+                 |      Returns pure premium by multiplying frequency by severity
+                 |      
+                 |      args:
+                 |          frequency (float) : rate at which events are taking place
+                 |          severity (float) : magnitude of the loss from the event(s)
+                 |          
+                 |      Returns:
+                 |          float : pure premium
+                 |  
+                 |  ----------------------------------------------------------------------
+                 |  Data descriptors defined here:
+                 |  
+                 |  __dict__
+                 |      dictionary for instance variables (if defined)
+                 |  
+                 |  __weakref__
+                 |      list of weak references to the object (if defined)
+                ```
+
+                Code example
+
+                ```python
+                >> from phew import Premium
+                >> gross_rate = Premium.gross_rate(pure_premium = 2000,expense_ratio = 0.23)
+                >> gross_rate
+                >> 2597.402597402597
+                ```
+
+                ### Time value
+
+                Help on class Time_value in module phew.Time_value:
+
+                ```nothing
+
+                class Time_value(builtins.object)
+                 |  Returns time value of money
+                 |  
+                 |  Methods defined here:
+                 |  
+                 |  future_value(amount: float, interest_rate: float, periods: float)
+                 |      Returns future value of an amount
+                 |      
+                 |      args:
+                 |          amount (float) : present value
+                 |          interest_rate (float) : interest rate
+                 |          periods (float) : number of periods
+                 |          
+                 |      Returns:
+                 |          float : future value
+                 |  
+                 |  present_value(amount: float, interest_rate: float, periods: float)
+                 |      Returns present value of an amount
+                 |      
+                 |      args:
+                 |          amount (float) : future value
+                 |          interest_rate (float) : interest rate
+                 |          periods (float) : number of periods
+                 |          
+                 |      Returns:
+                 |          float :  present value
+                 |  
+                 |  ----------------------------------------------------------------------
+                 |  Data descriptors defined here:
+                 |  
+                 |  __dict__
+                 |      dictionary for instance variables (if defined)
+                 |  
+                 |  __weakref__
+                 |      list of weak references to the object (if defined)
+
+                ```
+
+                ### Interest rates
+
+                Help on class Interest_rates in module phew.Interest_rates:
+
+                ```nothing
+
+                class Interest_rates(builtins.object)
+                 |  Returns functions for interest rates
+                 |  
+                 |  Data descriptors defined here:
+                 |  
+                 |  __dict__
+                 |      dictionary for instance variables (if defined)
+                 |  
+                 |  __weakref__
+                 |      list of weak references to the object (if defined)
+                 |  
+                 |  ----------------------------------------------------------------------
+                 |  Data and other attributes defined here:
+                 |  
+                 |  compute = <class 'phew.Interest_rates.formulae.compute'>
+                 |      Returns formulae for interest rates
+                 |  
+                 |  
+                 |  vasicek = <class 'phew.Interest_rates.models.vasicek'>
+                 |      Returns functions for simulating evolution of interest rates using vasicek model
+                 |      
+                 |      args:
+                 |          data (list) : interest rate data
+                 |          number_of_prediction_points (int) : number of prediction points
+
+                ```
+
+                #### Interest_rates.compute
+
+                Help on class compute in module phew.Interest_rates.formulae:
+
+                ```nothing
+
+                class compute(builtins.object)
+                 |  Returns formulae for interest rates
+                 |  
+                 |  Methods defined here:
+                 |  
+                 |  effective_interest_rate(nominal_interest_rate: float, number_of_compounding_periods: int)
+                 |      Returns effective interest rate converted from nominal interest rate
+                 |      
+                 |      args:
+                 |          nominal_interest_rate (float) : real interest rate plus inflation
+                 |          number_of_compounding_periods (int) : number of compounding periods
+                 |          
+                 |      Returns:
+                 |          float : effective interest rate
+                 |  
+                 |  inflation_rate(real_interest_rate: float, nominal_interest_rate: float)
+                 |      Returns inflation rate by subtracting real interest rate from nominal interest rate
+                 |      
+                 |      args:
+                 |          real_interest_rate (float) : interest rate adjusted for inflation
+                 |          nominal_interest_rate (float) : real interest rate plus inflation
+                 |          
+                 |      Returns:
+                 |          float : inflation rate
+                 |  
+                 |  nominal_interest_rate(real_interest_rate: float, inflation_rate: float)
+                 |      Returns nominal interest rate by adding real interest rate to inflation rate
+                 |      
+                 |      args:
+                 |          real_interest_rate (float) : interest rate adjusted for inflation
+                 |          inflation rate (float) : rate of prices increase
+                 |          
+                 |      Returns:
+                 |          float : nominal interest rate
+                 |  
+                 |  real_interest_rate(nominal_interest_rate: float, inflation_rate: float)
+                 |      Returns real interest rate by subtracting inflation rate from nominal interest rate
+                 |      
+                 |      args:
+                 |          nominal_interest_rate (float) : real interest rate plus inflation
+                 |          inflation_rate (float) : rate of prices increase
+                 |          
+                 |      Returns:
+                 |          float : real interest rate
+                 |  
+                 |  ----------------------------------------------------------------------
+                 |  Data descriptors defined here:
+                 |  
+                 |  __dict__
+                 |      dictionary for instance variables (if defined)
+                 |  
+                 |  __weakref__
+                 |      list of weak references to the object (if defined)
+                ```
+
+                Code example
+
+                ```python
+                >> from phew import Interest_rates
+                >> rate = Interest_rates.compute.effective_interest_rate(nominal_interest_rate = 0.12,number_of_compounding_periods = 12)
+                >> rate
+                >> 0.12682503013196977
+                ```
+
+                #### Interest_rates.vasicek
+
+                Help on class vasicek in module phew.Interest_rates.models:
+
+                ```nothing
+
+                class vasicek(builtins.object)
+                 |  vasicek(data: list, number_of_prediction_points: int)
+                 |  
+                 |  Returns functions for simulating evolution of interest rates using vasicek model
+                 |  
+                 |  args:
+                 |      data (list) : interest rate data
+                 |      number_of_prediction_points (int) : number of prediction points
+                 |  
+                 |  Methods defined here:
+                 |  
+                 |  __init__(self, data: list, number_of_prediction_points: int)
+                 |      Initialize self.  See help(type(self)) for accurate signature.
+                 |  
+                 |  expectation(self)
+                 |      Returns expected rate today
+                 |      
+                 |      Returns:
+                 |          list: expected rate today
+                 |  
+                 |  fit(self)
+                 |      Calibration of the model
+                 |  
+                 |  ols_model_results(self)
+                 |      Returns statistics for ols model used in calibration
+                 |      
+                 |      Returns:
+                 |          object: Returns statistics for ols model used in calibration
+                 |  
+                 |  variance(self)
+                 |      Returns variance of the rate today
+                 |      
+                 |      Returns:
+                 |          list: variance
+                 |  
+                 |  ----------------------------------------------------------------------
+                 |  Data descriptors defined here:
+                 |  
+                 |  __dict__
+                 |      dictionary for instance variables (if defined)
+                 |  
+                 |  __weakref__
+                 |      list of weak references to the object (if defined)
+
+                ```
+
+                This vasicek implementation is inspired by [this link](https://youtu.be/VSfOeEkNmKQ?si=htJw8Csxa61BM2fX)
+
+                ### License
+
+                [MIT](https://choosealicense.com/licenses/mit/)
